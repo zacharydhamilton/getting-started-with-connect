@@ -1,0 +1,12 @@
+env.sh
+
+terraform/.terraform*
+terraform/*.tfstate
+terraform/*.tfstate.backup
+
+with-source/confluent-*.tar.gz
+with-source/confluent-*
+with-source/plugins/*
+with-source/worker.properties
+
+with-docker/docker-compose.yaml

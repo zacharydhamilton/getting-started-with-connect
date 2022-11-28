@@ -1,0 +1,27 @@
+bootstrap.servers=${bootstrap_server}
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+
+group.id=connect-distributed
+client.id=connect-distributed
+
+config.storage.topic=connect-config
+offset.storage.topic=connect-offset
+status.storage.topic=connect-status
+
+rest.advertised.host.name=connect
+rest.advertised.port=8083
+
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
+security.protocol=SASL_SSL
+sasl.mechanism=PLAIN
+
+plugin.path=${fully_qualified_path}/with-source/confluent-7.3.0/share/java,${fully_qualified_path}/with-source/plugins
+
+producer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
+producer.security.protocol=SASL_SSL
+producer.sasl.mechanism=PLAIN
+
+consumer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
+consumer.security.protocol=SASL_SSL
+consumer.sasl.mechanism=PLAIN
