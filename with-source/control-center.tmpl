@@ -1,0 +1,16 @@
+confluent.controlcenter.name=control-center
+confluent.controlcenter.mode.enable=management
+bootstrap.servers=${bootstrap_server}
+
+confluent.controlcenter.data.dir=${fully_qualified_path}/with-source/c3-data
+
+confluent.controlcenter.connect.connect.cluster=http://localhost:8083
+
+confluent.controlcenter.streams.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
+confluent.controlcenter.streams.security.protocol=SASL_SSL
+confluent.controlcenter.streams.sasl.mechanism=PLAIN
+
+confluent.metrics.topic.partitions=1
+confluent.metrics.topic.max.message.bytes=8388608
+confluent.controlcenter.internal.topics.partitions=1
+confluent.monitoring.interceptor.topic.partitions=1

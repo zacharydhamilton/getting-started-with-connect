@@ -30,3 +30,27 @@ services:
       CONNECT_CONSUMER_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
       CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
       CONNECT_PCONSUMER_SASL_MECHANISM: PLAIN
+  control-center:
+    hostname: control-center
+    container_name: control-center
+    image: confluentinc/cp-enterprise-control-center:7.3.0
+    ports: 
+      - "9021:9021"
+    environment:
+      CONTROL_CENTER_NAME: control-center
+      CONTROL_CENTER_MODE_ENABLE: management
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: ${bootstrap_server}
+      CONTROL_CENTER_STREAMS_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
+      CONTROL_CENTER_STREAMS_SECURITY_PROTOCOL: SASL_SSL
+      CONTROL_CENTER_STREAMS_SASL_MECHANISM: PLAIN 
+      CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: http://connect:8083
+      CONTROL_CENTER_METRICS_TOPIC_MAX_MESSAGE_BYTES: 8388608
+      CONTROL_CENTER_REPLICATION_FACTOR: 3
+  postgres:
+    hostname: postgres
+    container_name: postgres
+    build:
+      context: ../postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"

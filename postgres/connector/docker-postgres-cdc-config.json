@@ -1,0 +1,23 @@
+{
+    "name": "PostgresConnectorConnector",
+    "config": {
+        "name": "PostgresConnectorConnector",
+        "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "tasks.max": "1",
+        "database.server.name": "postgres",
+        "database.hostname": "postgres",
+        "database.port": "5432",
+        "database.user": "postgres",
+        "database.password": "c00l-p0stgr3s",
+        "database.dbname": "postgres",
+        "slot.name": "hellojeff",
+        "table.include.list": "ecommerce.orders, ecommerce.products, ecommerce.customers, ecommerce.demographics",
+        "topic.creation.groups": "ecommerce",
+        "topic.creation.ecommerce.include": "postgres.ecommerse.*",
+        "topic.creation.ecommerce.replication.factor": 3,
+        "topic.creation.ecommerce.partitions": 6,
+        "topic.creation.ecommerce.cleanup.policy": "delete",
+        "topic.creation.default.replication.factor": 3,
+        "topic.creation.default.partitions": 6
+    }
+}

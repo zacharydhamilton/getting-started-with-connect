@@ -1,0 +1,11 @@
+---
+version: '2'
+services: 
+  postgres:
+      hostname: postgres
+      container_name: postgres
+      build:
+        context: ../postgres
+        dockerfile: Dockerfile
+      ports:
+        - "5432:5432"

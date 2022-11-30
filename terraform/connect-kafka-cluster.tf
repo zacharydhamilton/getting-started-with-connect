@@ -141,3 +141,16 @@ resource "local_file" "with_docker_docker_compose_yaml" {
     filename = "../with-docker/docker-compose.yaml"
     content = data.template_file.with_docker_docker_compose_yaml_template.rendered
 }
+data "template_file" "with_source_control_center_properties_template" {
+    template = "${file("../with-source/control-center.tmpl")}"
+    vars = {
+        bootstrap_server = substr(confluent_kafka_cluster.default_cluster.bootstrap_endpoint,11,-1)
+        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
+        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
+        fully_qualified_path = abspath(dirname("../"))
+    }
+}
+resource "local_file" "with_source_control_center_properties" {
+    filename = "../with-source/control-center.properties"
+    content = data.template_file.with_source_control_center_properties_template.rendered
+}

@@ -8,5 +8,7 @@ with-source/confluent-*.tar.gz
 with-source/confluent-*
 with-source/plugins/*
 with-source/worker.properties
+with-source/control-center.properties
+with-source/c3-data/*
 
 with-docker/docker-compose.yaml
