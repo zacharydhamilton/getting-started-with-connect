@@ -1,0 +1,13 @@
+# If you use the VSCode REST plugin, you can use the following:
+
+### Get information about the connect cluster (or see if it's online)
+GET http://localhost:8083/
+
+### Get a list of the current connectors
+GET http://localhost:8083/connectors/
+
+### Get the current status of the 'PostgresConnectorCDCSource' connector
+GET http://localhost:8083/connectors/PostgresConnectorCDCSource/status
+
+### Get the current status of the 'PostgresConnectorJDBCSink' connector
+GET http://localhost:8083/connectors/PostgresConnectorJDBCSink/status

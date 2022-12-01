@@ -1,11 +1,26 @@
 ---
 version: '2'
 services: 
-  postgres:
-      hostname: postgres
-      container_name: postgres
-      build:
-        context: ../postgres
-        dockerfile: Dockerfile
-      ports:
-        - "5432:5432"
+  ecommerce-db:
+    hostname: ecommerce-db
+    container_name: ecommerce-db
+    build:
+      context: ../postgres
+      dockerfile: ecommerce.Dockerfile
+    ports:
+      - "5432:5432"
+    networks:
+      - docker-databases
+  analytics-db:
+    hostname: analytics-db
+    container_name: analytics-db
+    build:
+      context: ../postgres
+      dockerfile: analytics.Dockerfile
+    ports: 
+      - "5433:5432"
+    networks:
+      - docker-databases
+networks:
+  docker-databases:
+    name: docker-database-network

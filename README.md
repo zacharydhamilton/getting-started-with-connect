@@ -134,3 +134,12 @@
     ```bash
         sh delete-connector.sh <source|docker>-postgres-cdc-config.json
     ```
+
+## Useful links
+
+* https://docs.confluent.io/platform/current/installation/installing_cp/zip-tar.html 
+* https://docs.confluent.io/platform/current/installation/docker/image-reference.html#docker-image-reference-for-cp 
+* https://www.confluent.io/hub/ 
+* https://docs.confluent.io/kafka-connectors/self-managed/kafka_connectors.html
+* https://docs.confluent.io/platform/current/connect/references/allconfigs.html#distributed-worker-configuration
+* https://docs.confluent.io/platform/current/control-center/installation/configuration.html

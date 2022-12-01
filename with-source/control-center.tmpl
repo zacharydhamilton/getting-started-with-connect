@@ -4,7 +4,7 @@ bootstrap.servers=${bootstrap_server}
 
 confluent.controlcenter.data.dir=${fully_qualified_path}/with-source/c3-data
 
-confluent.controlcenter.connect.connect.cluster=http://localhost:8083
+confluent.controlcenter.connect.connect-default.cluster=http://localhost:8083
 
 confluent.controlcenter.streams.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
 confluent.controlcenter.streams.security.protocol=SASL_SSL
