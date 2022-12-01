@@ -154,3 +154,14 @@ resource "local_file" "with_source_control_center_properties" {
     filename = "../with-source/control-center.properties"
     content = data.template_file.with_source_control_center_properties_template.rendered
 }
+data "template_file" "postgres_connector_docker_jdbc_sink_config_json_template" {
+    template = "${file("../postgres/connector/docker-jdbc-sink-config.tmpl")}"
+    vars = {
+        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
+        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
+    }
+}
+resource "local_file" "postgres_connector_docker_jdbc_sink_config_json" {
+    filename = "../postgres/connector/docker-jdbc-sink-config.json"
+    content = data.template_file.postgres_connector_docker_jdbc_sink_config_json_template.rendered
+}

@@ -1,4 +1,5 @@
 env.sh
+requests.http
 
 terraform/.terraform*
 terraform/*.tfstate
@@ -12,3 +13,5 @@ with-source/control-center.properties
 with-source/c3-data/*
 
 with-docker/docker-compose.yaml
+
+postgres/connector/docker-jdbc-sink-config.json

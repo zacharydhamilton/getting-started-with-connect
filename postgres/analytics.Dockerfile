@@ -10,17 +10,14 @@ ENV POSTGRES_DB=postgres
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=c00l-p0stgr3s
 
-RUN mkdir /data
-COPY data/* /data/
-
 RUN rm /docker-entrypoint-initdb.d/inventory.sql
-COPY setup/setup.sql /docker-entrypoint-initdb.d/
-ADD setup/setup.sql /docker-entrypoint-initdb.d
+COPY setup/setup_analytics.sql /docker-entrypoint-initdb.d/
+ADD setup/setup_analytics.sql /docker-entrypoint-initdb.d
 
-COPY setup/setup.sh /docker-entrypoint-initdb.d/
-ADD setup/setup.sh /docker-entrypoint-initdb.d
+COPY setup/setup_configurations.sh /docker-entrypoint-initdb.d/
+ADD setup/setup_configurations.sh /docker-entrypoint-initdb.d
 
 RUN chmod a+r /docker-entrypoint-initdb.d/*
-RUN chmod a+x /docker-entrypoint-initdb.d/setup.sh
+RUN chmod a+x /docker-entrypoint-initdb.d/setup_configurations.sh
 
 EXPOSE 5432

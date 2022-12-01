@@ -1,7 +1,7 @@
 {
-    "name": "PostgresConnectorConnector",
+    "name": "PostgresConnectorCDCSource",
     "config": {
-        "name": "PostgresConnectorConnector",
+        "name": "PostgresConnectorCDCSource",
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
         "tasks.max": "1",
         "database.server.name": "postgres",
@@ -10,7 +10,7 @@
         "database.user": "postgres",
         "database.password": "c00l-p0stgr3s",
         "database.dbname": "postgres",
-        "slot.name": "hellojeff",
+        "slot.name": "debeezy",
         "table.include.list": "ecommerce.orders, ecommerce.products, ecommerce.customers, ecommerce.demographics",
         "topic.creation.groups": "ecommerce",
         "topic.creation.ecommerce.include": "postgres.ecommerse.*",

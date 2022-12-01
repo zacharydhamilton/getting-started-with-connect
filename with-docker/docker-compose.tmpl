@@ -2,13 +2,15 @@
 version: '2'
 services: 
   connect:
-    hostname: connect
-    container_name: connect
     build: 
       context: .
       dockerfile: Dockerfile
-    ports: 
-      - "8083:8083"
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+    expose:
+      - "8083"
     environment: 
       CONNECT_BOOTSTRAP_SERVERS: ${bootstrap_server}
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
@@ -46,11 +48,29 @@ services:
       CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: http://connect:8083
       CONTROL_CENTER_METRICS_TOPIC_MAX_MESSAGE_BYTES: 8388608
       CONTROL_CENTER_REPLICATION_FACTOR: 3
-  postgres:
-    hostname: postgres
-    container_name: postgres
+  ecommerce-db:
+    hostname: ecommerce-db
+    container_name: ecommerce-db
     build:
       context: ../postgres
+      dockerfile: ecommerce.Dockerfile
+    expose:
+      - "5432"
+  analytics-db:
+    hostname: analytics-db
+    container_name: analytics-db
+    build:
+      context: ../postgres
+      dockerfile: analytics.Dockerfile
+  nginx:
+    hostname: nginx
+    container_name: load-balancer 
+    build:
+      context: ../nginx
       dockerfile: Dockerfile
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
+    ports: 
+      - "8083:8083"
+    depends_on:
+      - connect
