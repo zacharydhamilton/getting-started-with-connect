@@ -86,7 +86,7 @@
         cd ../postgres/connectors
     ```
     ```bash
-        sh create-postgres-cdc.sh <source|docker>-postgres-cdc-config.json
+        sh create-connector.sh <source|docker>-postgres-cdc-config.json
     ```
     You should see something similar to the following as an output if the connector was created successfully.
     ```json
@@ -122,7 +122,7 @@
 
     To update the connector you created above, make a change to either `source-postgres-cdc-config.json` or `docker-postgres-cdc-config.json` depending on what deployment you're using, for example, change the `tasks.max` to 3 like above. After saving the file, running the following script to update the connector.
     ```bash
-        sh update-postgres-cdc.sh <source|docker>-postgres-cdc-config.json
+        sh update-connector.sh <source|docker>-postgres-cdc-config.json
     ```
 
 
@@ -132,5 +132,5 @@
 
     To delete the connector you created above, use the provided script.
     ```bash
-        sh delete-postgres-cdc.sh <source|docker>-postgres-cdc-config.json
+        sh delete-connector.sh <source|docker>-postgres-cdc-config.json
     ```
