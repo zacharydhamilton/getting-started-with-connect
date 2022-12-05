@@ -1,13 +1,13 @@
 {
-    "name": "PostgresConnectorJDBCSink",
+    "name": "SourcePostgresConnectorJDBCSink",
     "config": {
-        "name": "PostgresConnectorJDBCSink",
+        "name": "SourcePostgresConnectorJDBCSink",
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
         "tasks.max": "1",
         "auto.create": true,
         "topics": "postgres.ecommerce.orders",
         "table.name.format": "analytics.orders",
-        "connection.url": "jdbc:postgresql://analytics-db:5432/postgres",
+        "connection.url": "jdbc:postgresql://localhost:5433/postgres",
         "connection.user": "postgres",
         "connection.password": "c00l-p0stgr3s",
         "consumer.override.sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';",

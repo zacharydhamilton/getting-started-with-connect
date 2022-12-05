@@ -1,7 +1,7 @@
 {
-    "name": "PostgresConnectorCDCSource",
+    "name": "DockerPostgresConnectorCDCSource",
     "config": {
-        "name": "PostgresConnectorCDCSource",
+        "name": "DockerPostgresConnectorCDCSource",
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
         "tasks.max": "1",
         "database.server.name": "postgres",

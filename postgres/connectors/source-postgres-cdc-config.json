@@ -1,7 +1,7 @@
 {
-    "name": "PostgresConnectorCDCSource",
+    "name": "SourcePostgresConnectorCDCSource",
     "config": {
-        "name": "PostgresConnectorCDCSource",
+        "name": "SourcePostgresConnectorCDCSource",
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
         "tasks.max": "1",
         "database.server.name": "postgres",
