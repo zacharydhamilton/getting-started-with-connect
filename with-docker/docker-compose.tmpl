@@ -31,7 +31,7 @@ services:
       CONNECT_PRODUCER_SASL_MECHANISM: PLAIN
       CONNECT_CONSUMER_SASL_JAAS_CONFIG: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${kafka_cluster_key}'   password='${kafka_cluster_secret}';
       CONNECT_CONSUMER_SECURITY_PROTOCOL: SASL_SSL
-      CONNECT_PCONSUMER_SASL_MECHANISM: PLAIN
+      CONNECT_CONSUMER_SASL_MECHANISM: PLAIN
   control-center:
     hostname: control-center
     container_name: control-center

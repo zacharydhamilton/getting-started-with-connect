@@ -8,10 +8,6 @@ terraform {
             source = "hashicorp/local"
             version = "2.2.3"
         }
-        template = {
-            source = "hashicorp/template"
-            version = "2.2.0"
-        }
     }
 }
 
@@ -116,63 +112,43 @@ resource "confluent_api_key" "clients_default_cluster_key" {
 # The following will interpolate the correct values into 
 # properties files
 # ------------------------------------------------------------
-data "template_file" "with_source_worker_properties_template" {
-    template = "${file("../with-source/worker.tmpl")}"
-    vars = {
+resource "local_file" "with_source_worker_properties" {
+    filename = "../with-source/worker.properties"
+    content = templatefile("../with-source/worker.tmpl", {
         bootstrap_server = substr(confluent_kafka_cluster.default_cluster.bootstrap_endpoint,11,-1)
         kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
         kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
         fully_qualified_path = abspath(dirname("../"))
-    }
-}
-resource "local_file" "with_source_worker_properties" {
-    filename = "../with-source/worker.properties"
-    content = data.template_file.with_source_worker_properties_template.rendered
-}
-data "template_file" "with_docker_docker_compose_yaml_template" {
-    template = "${file("../with-docker/docker-compose.tmpl")}"
-    vars = {
-        bootstrap_server = substr(confluent_kafka_cluster.default_cluster.bootstrap_endpoint,11,-1)
-        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
-        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
-    }
+    })
 }
 resource "local_file" "with_docker_docker_compose_yaml" {
     filename = "../with-docker/docker-compose.yaml"
-    content = data.template_file.with_docker_docker_compose_yaml_template.rendered
+    content = templatefile("../with-docker/docker-compose.tmpl", {
+        bootstrap_server = substr(confluent_kafka_cluster.default_cluster.bootstrap_endpoint,11,-1)
+        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
+        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
+    })
 }
-data "template_file" "with_source_control_center_properties_template" {
-    template = "${file("../with-source/control-center.tmpl")}"
-    vars = {
+resource "local_file" "with_source_control_center_properties" {
+    filename = "../with-source/control-center.properties"
+    content = templatefile("../with-source/control-center.tmpl", {
         bootstrap_server = substr(confluent_kafka_cluster.default_cluster.bootstrap_endpoint,11,-1)
         kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
         kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
         fully_qualified_path = abspath(dirname("../"))
-    }
-}
-resource "local_file" "with_source_control_center_properties" {
-    filename = "../with-source/control-center.properties"
-    content = data.template_file.with_source_control_center_properties_template.rendered
-}
-data "template_file" "postgres_connector_docker_jdbc_sink_config_json_template" {
-    template = "${file("../postgres/connector/docker-jdbc-sink-config.tmpl")}"
-    vars = {
-        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
-        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
-    }
+    })
 }
 resource "local_file" "postgres_connector_docker_jdbc_sink_config_json" {
-    filename = "../postgres/connector/docker-jdbc-sink-config.json"
-    content = data.template_file.postgres_connector_docker_jdbc_sink_config_json_template.rendered
-}
-data "template_file" "postgres_connector_source_jdbc_sink_config_json_template" {
-    template = "${file("../postgres/connector/source-jdbc-sink-config.tmpl")}"
-    vars = {
+    filename = "../postgres/connectors/docker-jdbc-sink-config.json"
+    content = templatefile("../postgres/connectors/docker-jdbc-sink-config.tmpl", {
         kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
         kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
-    }
+    })
 }
 resource "local_file" "postgres_connector_source_jdbc_sink_config_json" {
-    filename = "../postgres/connector/source-jdbc-sink-config.json"
-    content = data.template_file.postgres_connector_source_jdbc_sink_config_json_template.rendered
+    filename = "../postgres/connectors/source-jdbc-sink-config.json"
+    content = templatefile("../postgres/connectors/source-jdbc-sink-config.tmpl", {
+        kafka_cluster_key = confluent_api_key.clients_default_cluster_key.id
+        kafka_cluster_secret = confluent_api_key.clients_default_cluster_key.secret
+    })
 }

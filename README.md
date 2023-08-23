@@ -115,7 +115,7 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. Once the two instances of Postgres have been created, use the provided connector config files in order to create an instance of a Postgres CDC Source Connector.
     ```bash
-        sh ../postgres/connectors/create-connector.sh source-postgres-cdc-config.json
+        sh ../postgres/connectors/create-connector.sh ../postgres/connectors/source-postgres-cdc-config.json
     ```
     You should see something similar to the following as an output if the connector was created successfully.
     ```json
@@ -149,7 +149,7 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. Once you've created the Postgres CDC Source Connector and see data in topics, you can now sink it back to another database. Use the following to now create a JDBC Sink Connector.
     ```bash
-        sh ../postgres/connectors/create-connector.sh source-jdbc-sink-config.json
+        sh ../postgres/connectors/create-connector.sh ../postgres/connectors/source-jdbc-sink-config.json
     ```
     Like the first connector, if successful you should see a JSON output in your terminal. 
 
@@ -157,10 +157,10 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. When you're content with the connectors you've created, it's time to delete them. 
     ```bash
-        sh ../postgres/connectors/delete-connector.sh source-postgres-cdc-config.json
+        sh ../postgres/connectors/delete-connector.sh ../postgres/connectors/source-postgres-cdc-config.json
     ```
     ```bash
-        sh ../postgres/connectors/delete-connector.sh source-jdbc-sink-config.json
+        sh ../postgres/connectors/delete-connector.sh ../postgres/connectors/source-jdbc-sink-config.json
     ```
 
 1. Shutdown the database instances.
@@ -197,7 +197,7 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. Two instances of Postgres should have been created with the Docker compose config. Use the provided connector config files in order to create an instance of a Postgres CDC Source Connector.
     ```bash
-        sh ../postgres/connectors/create-connector.sh docker-postgres-cdc-config.json
+        sh ../postgres/connectors/create-connector.sh ../postgres/connectors/docker-postgres-cdc-config.json
     ```
     You should see something similar to the following as an output if the connector was created successfully.
     ```json
@@ -231,7 +231,7 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. Once you've created the Postgres CDC Source Connector and see data in topics, you can now sink it back to another database. Use the following to now create a JDBC Sink Connector.
     ```bash
-        sh ../postgres/connectors/create-connector.sh docker-jdbc-sink-config.json
+        sh ../postgres/connectors/create-connector.sh ../postgres/connectors/docker-jdbc-sink-config.json
     ```
     Like the first connector, if successful you should see a JSON output in your terminal. 
 
@@ -239,10 +239,10 @@ At this point (everything going as planned 🤞), you should have everything you
 
 1. When you're content with the connectors you've created, it's time to delete them. 
     ```bash
-        sh ../postgres/connectors/delete-connector.sh docker-postgres-cdc-config.json
+        sh ../postgres/connectors/delete-connector.sh ../postgres/connectors/docker-postgres-cdc-config.json
     ```
     ```bash
-        sh ../postgres/connectors/delete-connector.sh docker-jdbc-sink-config.json
+        sh ../postgres/connectors/delete-connector.sh ../postgres/connectors/docker-jdbc-sink-config.json
     ```
 
 1. Shutdown the worker, Control Center, and the Postgres instances.

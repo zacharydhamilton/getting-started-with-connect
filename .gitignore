@@ -13,4 +13,4 @@ with-source/c3-data/*
 
 with-docker/docker-compose.yaml
 
-postgres/connector/*-jdbc-sink-config.json
+postgres/connectors/*-jdbc-sink-config.json
