@@ -13,8 +13,15 @@ services:
       - docker-deploy-network
     environment: 
       CONNECT_BOOTSTRAP_SERVERS: ${bootstrap_server}
+      CONNECT_INTERNAL_KEY_CONVERTER_SCHEMAS_ENABLED: false
+      CONNECT_INTERNAL_VALUE_CONVERTER_SCHEMAS_ENABLED: false
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_BASIC_AUTH_CREDENTIALS_SOURCE: USER_INFO
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: ${schema_registry_cluster_key}:${schema_registry_cluster_secret}
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: ${schema_registry_cluster_endpoint}
       CONNECT_GROUP_ID: connect-distributed
       CONNECT_CLIENT_ID: connect-distributed
       CONNECT_CONFIG_STORAGE_TOPIC: connect-configs

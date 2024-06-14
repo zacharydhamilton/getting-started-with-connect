@@ -1,6 +1,15 @@
 bootstrap.servers=${bootstrap_server}
+
+internal.key.converter=org.apache.kafka.connect.json.JsonConverter
+internal.value.converter=org.apache.kafka.connect.json.JsonConverter
+internal.key.converter.schemas.enable=false
+internal.value.converter.schemas.enable=false
+
 key.converter=org.apache.kafka.connect.json.JsonConverter
-value.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=io.confluent.connect.avro.AvroConverter
+value.converter.basic.auth.credentials.source=USER_INFO
+value.converter.schema.registry.basic.auth.user.info=${schema_registry_cluster_key}:${schema_registry_cluster_secret}
+value.converter.schema.registry.url=${schema_registry_cluster_endpoint}
 
 group.id=connect-distributed
 client.id=connect-distributed
